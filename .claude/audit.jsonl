@@ -41,3 +41,7 @@
 {"ts":"2026-06-06T07:56:37.848Z","hook":"PreToolUse","note":"jq not installed; install jq for full process capture"}
 {"ts":"2026-06-06T07:57:21.057Z","hook":"PostToolUse","note":"jq not installed; install jq for full process capture"}
 {"ts":"2026-06-06T07:57:37.386Z","hook":"Stop","note":"jq not installed; install jq for full process capture"}
+{"ts":"2026-06-06T07:59:51.686Z","hook":"UserPromptSubmit","note":"jq not installed; install jq for full process capture"}
+{"ts":"2026-06-06T08:00:48.488Z","hook":"PreToolUse","note":"jq not installed; install jq for full process capture"}
+{"ts":"2026-06-06T08:01:30.668Z","hook":"PostToolUse","note":"jq not installed; install jq for full process capture"}
+{"ts":"2026-06-06T08:01:48.972Z","hook":"Stop","note":"jq not installed; install jq for full process capture"}

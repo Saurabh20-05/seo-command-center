@@ -75,8 +75,11 @@ def _report_obj() -> dict:
         "issues": RUN["issues"],
         "fixes": RUN.get("fixes", {"titles": [], "redirect_map": []}),
         "recommendations": RUN.get("recommendations", []),
-        "run_meta": {"model": MODEL, "model_calls": RUN.get("model_calls", 0),
-                     "duration_sec": RUN.get("duration_sec", 0)},
+        "run_meta": {
+            "model": MODEL,
+            "model_calls": RUN.get("model_calls", 0),
+            "duration_sec": RUN.get("duration_sec", 0),
+        },
     }
 
 

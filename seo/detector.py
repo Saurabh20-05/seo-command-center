@@ -120,6 +120,13 @@ def detect(rows: list[dict]) -> list[dict]:
         [r["Address"] for r in rows if 300 <= _int(r.get("Status Code")) <= 399],
         "URLs that redirect (3xx).")
 
+    # redirect chains (Address -> Redirect URL)
+    redirect_map = {r["Address"]: r.get("Redirect URL", "")
+                    for r in rows if 300 <= _int(r.get("Status Code")) <= 399}
+    chains = [addr for addr, target in redirect_map.items() if target in redirect_map]
+    add("redirect_chain", "High", chains, "Redirects that lead to another redirecting URL.")
+
+
     # --- Orphan pages ---
     add("orphan_page", "Medium",
         [r["Address"] for r in idx200 if _int(r.get("Inlinks")) == 0],

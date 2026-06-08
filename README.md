@@ -1,23 +1,18 @@
 <a href="https://labs.nmgdigital.com/">
   <img src="https://labs.nmgdigital.com/assets/logos/forge-hex.svg"
-       title="SEO Command Center"
-       alt="SEO Command Center"
-       width="180"/>
+       title="Forge-NMG-Labs-Hackathon"
+       alt="Forge-NMG-Labs-Hackathon"
+       width="200"
+       height="200"/>
 </a>
 
+<p style="font-size: 11px; color: #777777; margin-top: 5px; font-family: sans-serif;">
+  Presented by <a href="https://nmgdigital.com/" style="color: #777777; text-decoration: underline;">NMG Digital</a>
+</p>
+
+---
+
 <h1 align="center">SEO Command Center</h1>
-
-<p align="center">
-  AI-Powered Technical SEO Audit & Reporting Platform
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.11-blue" />
-  <img src="https://img.shields.io/badge/Claude-Code-orange" />
-  <img src="https://img.shields.io/badge/Ollama-Local_AI-green" />
-  <img src="https://img.shields.io/badge/SEO-Automation-red" />
-  <img src="https://img.shields.io/badge/Status-Completed-success" />
-</p>
 
 ---
 

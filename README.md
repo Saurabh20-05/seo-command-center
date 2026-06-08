@@ -1,80 +1,429 @@
-# SEO Command Center — Forge Sprint 01 starter
-
-A Claude Code **plugin** that ingests a **Screaming Frog SEO export**, audits it against
-the rulebook, prioritizes the issues, writes fixes, and renders a **live dashboard** plus
-an exportable client report. The plumbing works out of the box — you implement the SEO
-logic and push accuracy on the hidden export.
-
-
 <a href="https://labs.nmgdigital.com/">
   <img src="https://labs.nmgdigital.com/assets/logos/forge-hex.svg"
-       title="Forge-NMG-Labs-Hackathon"
-       alt="Forge-NMG-Labs-Hackathon"
-       width="200"
-       height="200"/>
+       title="SEO Command Center"
+       alt="SEO Command Center"
+       width="180"/>
 </a>
 
-<p style="font-size: 11px; color: #777777; margin-top: 5px; font-family: sans-serif;">
-  Presented by <a href="https://nmgdigital.com/" style="color: #777777; text-decoration: underline;">NMG Digital</a>
+<h1 align="center">SEO Command Center</h1>
+
+<p align="center">
+  AI-Powered Technical SEO Audit & Reporting Platform
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.11-blue" />
+  <img src="https://img.shields.io/badge/Claude-Code-orange" />
+  <img src="https://img.shields.io/badge/Ollama-Local_AI-green" />
+  <img src="https://img.shields.io/badge/SEO-Automation-red" />
+  <img src="https://img.shields.io/badge/Status-Completed-success" />
+</p>
 
-## Quick start (headless, proves it runs)
-```bash
-pip install mcp          # exposes MCP tools to Claude Code (dashboard works without it too)
-python run.py sample-export/
-# open the live cockpit:
-#   http://localhost:7700
-# outputs land in outputs/report.json and outputs/report.html
+---
+
+# Overview
+
+SEO Command Center is an AI-powered technical SEO auditing platform that automates the process of analyzing website crawl data, identifying SEO issues, prioritizing recommendations, and generating professional reports.
+
+The platform processes Screaming Frog SEO exports and transforms thousands of URLs into actionable SEO insights through a multi-agent workflow. By combining deterministic SEO analysis with local AI models, the system delivers fast, scalable, and transparent technical SEO audits without relying on external APIs.
+
+Built using Claude Code, Ollama, Python, MCP Server, and a real-time dashboard architecture, SEO Command Center provides a complete end-to-end workflow for technical SEO analysis and reporting.
+
+---
+
+# Why This Project?
+
+Technical SEO audits often require manually reviewing thousands of pages, identifying issues, prioritizing fixes, and preparing reports for stakeholders.
+
+SEO Command Center automates this workflow by:
+
+* Detecting technical SEO issues automatically
+* Prioritizing findings based on severity
+* Generating AI-assisted recommendations
+* Producing client-ready reports
+* Visualizing audit progress in real time
+* Reducing manual auditing effort
+
+---
+
+# Key Features
+
+* Automated Technical SEO Auditing
+* Screaming Frog Export Processing
+* Multi-Agent Workflow Architecture
+* AI-Assisted SEO Recommendations
+* Severity-Based Issue Prioritization
+* Title Tag Optimization
+* Meta Description Optimization
+* Redirect Mapping Suggestions
+* Live Dashboard Monitoring
+* Client-Ready HTML Reporting
+* Structured JSON Export
+* Real-Time Audit Tracking
+* Offline Local AI Processing
+* Rule-Based SEO Validation Engine
+
+---
+
+# System Architecture
+
+```text
+Screaming Frog Export
+          │
+          ▼
+      Data Ingestion
+          │
+          ▼
+      SEO Analysis
+          │
+          ▼
+    Issue Detection
+          │
+          ▼
+   Issue Prioritization
+          │
+          ▼
+      AI Fix Engine
+          │
+          ▼
+    Report Generator
+          │
+          ▼
+ Dashboard & Reports
 ```
 
-## Inside Claude Code
-```
-/seo-audit sample-export/
-```
+---
 
-## What's here
-```
+# Multi-Agent Workflow
+
+The platform utilizes specialized agents responsible for different stages of the auditing process.
+
+| Agent          | Responsibility                        |
+| -------------- | ------------------------------------- |
+| Ingest Agent   | Reads and validates crawl exports     |
+| Auditor Agent  | Detects technical SEO issues          |
+| Fix Agent      | Generates AI-assisted recommendations |
+| Reporter Agent | Produces structured reports           |
+
+---
+
+# Project Structure
+
+```text
 seo-command-center/
-├── .claude-plugin/plugin.json   plugin manifest (skill + command + agents + MCP)
-├── .claude/                     audit hooks (settings.json + hooks/audit.sh) → records your process
-├── skills/seo-audit/SKILL.md    orchestrator
-├── agents/                      ingest, auditor, fixer, reporter (sub-agents)
-├── commands/seo-audit.md        the /seo-audit command
-├── mcp/server.py                local MCP server + live dashboard host (localhost:7700)
-├── seo/detector.py              deterministic issue detection  ← EXTEND THIS to the full rulebook
-├── dashboard/                   index.html + app.js (the cockpit)
-├── scripts/export-transcript.sh saves your session transcript to agent-log.md (commit it)
-├── run.py                       headless runner (the grader's entry point)
-└── outputs/                     report.json + report.html (generated)
+│
+├── .claude-plugin/
+│   └── plugin.json
+│
+├── .claude/
+│   ├── hooks/
+│   │   └── audit.sh
+│   ├── audit.jsonl
+│   └── settings.json
+│
+├── agents/
+│   ├── ingest.md
+│   ├── auditor.md
+│   ├── fixer.md
+│   └── reporter.md
+│
+├── commands/
+│   └── seo-audit.md
+│
+├── dashboard/
+│   ├── index.html
+│   └── app.js
+│
+├── mcp/
+│   └── server.py
+│
+├── seo/
+│   ├── __init__.py
+│   └── detector.py
+│
+├── outputs/
+│   ├── report.json
+│   └── report.html
+│
+├── scripts/
+│   └── export-transcript.sh
+│
+├── skills/
+│   └── seo-audit/
+│       └── SKILL.md
+│
+├── run.py
+└── README.md
 ```
 
-## Your job in the Sprint
-1. **Complete `seo/detector.py`** to cover the full `rulebook.md` (the starter only does a
-   few issue types). Accuracy on the hidden export is the biggest part of your score.
-2. **Implement the fixer** (titles/meta rewrites within limits + a redirect map) for the
-   champion tier — see `agents/fixer.md`.
-3. **Improve the dashboard / report** to be genuinely client-ready.
-4. **Commit incrementally** (≥10 commits) and let the audit hooks record your process.
+---
 
-## Process + memory files you must maintain (graded — see challenge brief section 08)
-These are how the judges assess *how you worked with the AI*, not just the result:
-- `.claude/audit.jsonl` — auto-written by the hooks (every tool call). Commit it. Keep
-  `.claude/settings.json` in place so the hooks keep recording.
-- `agent-log.md` — run `bash scripts/export-transcript.sh` at the end to export your session
-  transcript. Commit it.
-- `CLAUDE.md` — your project memory / instructions for the agent. **Edit this as you build** —
-  good context engineering is the clearest signal of good practice.
-- `PROMPTS.md` — log your key prompts (the ones that moved the build).
-- `DECISIONS.md` — log your real decisions and what you learned / fixed.
+# SEO Checks Supported
 
-The three records (audit log, transcript, git history) must agree — that is how a real process
-is told apart from a fabricated one. Do not edit or fake the logs.
+## Page Titles
 
-## The model
-Run on the free local stack (Claude Code + Ollama). Set `OLLAMA_CONTEXT_LENGTH=65536`,
-use a tool-trained model (`qwen3.5:9b` or `gemma4:31b-cloud`), not `qwen2.5-coder`.
+* Missing Title Tags
+* Duplicate Titles
+* Title Too Long
+* Title Too Short
 
-## Note
-The dashboard renders the operator's own crawl data on localhost; it is a local cockpit,
-not a hardened public server. The shareable artifact is the exported `report.html`.
+## Meta Descriptions
+
+* Missing Meta Descriptions
+* Duplicate Meta Descriptions
+* Meta Description Too Long
+
+## Headings
+
+* Missing H1 Tags
+* Duplicate H1 Tags
+* Multiple H1 Tags
+
+## Response Codes
+
+* Redirects (3xx)
+* Redirect Chains
+* Redirect Loops
+* Client Errors (4xx)
+* Server Errors (5xx)
+
+## Content Analysis
+
+* Thin Content Detection
+* Missing Image Alt Text
+
+## Site Architecture
+
+* Orphan Pages
+* Non-Indexable Linked Pages
+* Canonical Issues
+
+## Performance
+
+* Slow Page Detection
+
+---
+
+# Tech Stack
+
+## Backend
+
+* Python
+* Pandas
+* CSV Processing
+* MCP Server
+
+## AI Layer
+
+* Claude Code
+* Ollama
+* Qwen 3.5
+* Local LLM Integration
+
+## Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+
+## Reporting
+
+* JSON Reports
+* HTML Reports
+
+## Development
+
+* Git
+* VS Code
+
+---
+
+# Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/seo-command-center.git
+
+cd seo-command-center
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Install MCP:
+
+```bash
+pip install mcp
+```
+
+---
+
+# Running the Project
+
+Run the audit:
+
+```bash
+python run.py sample-export/
+```
+
+Start the dashboard server:
+
+```bash
+python mcp/server.py
+```
+
+Open the dashboard:
+
+```text
+http://localhost:7700
+```
+
+---
+
+# Input Format
+
+The platform accepts Screaming Frog SEO exports.
+
+Required file:
+
+```text
+internal_all.csv
+```
+
+Key fields analyzed:
+
+* Address
+* Status Code
+* Indexability
+* Title 1
+* Meta Description 1
+* H1-1
+* Word Count
+* Inlinks
+* Response Time
+* Canonical Link Element 1
+* Redirect URL
+
+---
+
+# Output Files
+
+```text
+outputs/
+├── report.json
+└── report.html
+```
+
+### report.json
+
+Machine-readable SEO audit report containing:
+
+* Issue summaries
+* Severity classifications
+* Affected URLs
+* Recommendations
+* Run metadata
+
+### report.html
+
+Client-ready report suitable for stakeholder presentation and review.
+
+---
+
+# Example Workflow
+
+1. Export website crawl data from Screaming Frog.
+2. Place the export folder inside the project directory.
+3. Execute the audit process.
+4. Monitor progress through the live dashboard.
+5. Review generated findings.
+6. Export reports.
+7. Apply recommended fixes.
+
+---
+
+# Dashboard Features
+
+* Live Issue Counter
+* Severity Breakdown
+* Audit Progress Tracking
+* URL Inspection
+* Real-Time Updates
+* Report Export Controls
+* Interactive Monitoring Interface
+
+---
+
+# Performance Optimizations
+
+* Rule-Based SEO Detection
+* Efficient CSV Processing
+* Reduced Model Calls
+* Local AI Execution
+* Modular Agent Architecture
+* Scalable Crawl Processing
+* Separation of Detection and AI Reasoning
+
+---
+
+# Screenshots
+
+## Dashboard
+
+Add dashboard screenshot here.
+
+```text
+assets/dashboard.png
+```
+
+## Generated Report
+
+Add report screenshot here.
+
+```text
+assets/report.png
+```
+
+---
+
+# Future Enhancements
+
+* Hreflang Validation
+* XML Sitemap Auditing
+* Core Web Vitals Integration
+* Schema Markup Validation
+* Internal Linking Recommendations
+* Historical SEO Tracking
+* Multi-Site Auditing
+* Automated Fix Deployment
+
+---
+
+# Project Highlights
+
+* AI-Powered SEO Auditing
+* Multi-Agent Architecture
+* Real-Time Dashboard
+* Local AI Processing
+* Automated Prioritization
+* Client-Ready Reporting
+* Technical SEO Automation
+* End-to-End Audit Workflow
+
+---
+
+# Conclusion
+
+SEO Command Center demonstrates how AI agents can automate complex technical SEO workflows while maintaining transparency, scalability, and actionable reporting.
+
+The project combines deterministic SEO analysis with AI-assisted recommendations to create a complete technical SEO audit and reporting solution suitable for agencies, consultants, marketers, and website owners.
+
+---
+
+# Acknowledgements
+
+Built during Forge Sprint 01 by NMG Labs and NMG Digital.
